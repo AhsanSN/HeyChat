@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { DataHolderProvider } from '../../providers/data-holder/data-holder';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
+import { File } from '@ionic-native/file/ngx';
 
 @Component({
   selector: 'page-home',
@@ -8,7 +10,7 @@ import { DataHolderProvider } from '../../providers/data-holder/data-holder';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController, private DataHolderProvider: DataHolderProvider) {
+  constructor( private file: File, private socialSharing: SocialSharing, public navCtrl: NavController, private DataHolderProvider: DataHolderProvider) {
 
   }
 
@@ -54,15 +56,22 @@ export class HomePage {
     console.log("updated " , this.DataHolderProvider.numbers)
   }
 
-  openWhatsapp(phoneNumber){
-    var link = "https://api.whatsapp.com/send?phone="+phoneNumber;
+  async openWhatsapp(phoneNumber){
+    
+    var link = "whatsapp://send?phone="+phoneNumber;
     this.DataHolderProvider.numbers.forEach(element => {
       if(element.number==phoneNumber){
         element.status="read";
       }
     });
     this.DataHolderProvider.updateNumbertoStorage();
-    window.open(link);
+     
+    //window.open(link);
+    //window.plugins.socialSharing.shareViaWhatsAppToPhone('+31611111111', 'Message via WhatsApp', null /* img */, null /* url */, function() {console.log('share ok')})
+    
+    window['plugins'].socialsharing.shareViaWhatsAppToPhone(phoneNumber, 'Hey!', null /* img */, null /* url */, function() {console.log('share ok')})
+    
+  
   }
 
   favorite(phoneNumber){
@@ -82,6 +91,7 @@ export class HomePage {
     });
     this.DataHolderProvider.updateNumbertoStorage();
   }
+
  
 
 }
