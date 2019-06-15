@@ -20,8 +20,8 @@ export class HomePage {
   ionViewWillLoad(){
     console.log('ionViewWillEnter homepage');
     this.numbers = this.DataHolderProvider.getNumbers();
+    console.log("this.DataHolderProvider.lastUpdated", this.DataHolderProvider.lastUpdated);
     this.DataHolderProvider.getNumbersFromServer();
-    console.log("number home", this.numbers)
   }
 
   ionViewDidLoad() {
@@ -58,17 +58,13 @@ export class HomePage {
 
   async openWhatsapp(phoneNumber){
     
-    var link = "whatsapp://send?phone="+phoneNumber;
     this.DataHolderProvider.numbers.forEach(element => {
       if(element.number==phoneNumber){
         element.status="read";
       }
     });
     this.DataHolderProvider.updateNumbertoStorage();
-     
-    //window.open(link);
-    //window.plugins.socialSharing.shareViaWhatsAppToPhone('+31611111111', 'Message via WhatsApp', null /* img */, null /* url */, function() {console.log('share ok')})
-    
+
     window['plugins'].socialsharing.shareViaWhatsAppToPhone(phoneNumber, 'Hey!', null /* img */, null /* url */, function() {console.log('share ok')})
     
   

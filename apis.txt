@@ -1,4 +1,4 @@
 //apis
 
 //get numbers
-http://game.anomoz.com/api/wchat/post/read_numbers.php?country=PK
+http://game.anomoz.com/api/wchat/post/read_numbers.php?country=PK&lastId=4
