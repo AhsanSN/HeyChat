@@ -23,8 +23,6 @@ $app-direction: ltr;
 // http://ionicframework.com/docs/theming/overriding-ionic-variables/
 
 
-
-
 // Named Color Variables
 // --------------------------------------------------
 // Named colors makes it easy to reuse colors on various components.
@@ -37,8 +35,11 @@ $colors: (
   primary:    #383691,
   secondary:  #5831d8,
   danger:     #f53d3d,
-  light:      #c6ebbe,
-  dark:       #222
+  light_danger:     #ff9999,
+  light:      #f2ffef,
+  dark:       #222,
+  read:       #c6ebbe,
+  favourite:  #36a81c
 );
 
 

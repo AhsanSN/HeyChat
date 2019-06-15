@@ -13,6 +13,7 @@ export class HomePage {
   }
 
   numbers = [];
+  nNumbers = 0;
 
   ionViewWillLoad(){
     console.log('ionViewWillEnter homepage');
@@ -49,7 +50,37 @@ export class HomePage {
 
   updateData1_4(){
     this.numbers = this.DataHolderProvider.numbers;
-    console.log("updated " + this.numbers)
+    this.nNumbers = this.DataHolderProvider.nNumbers;
+    console.log("updated " , this.DataHolderProvider.numbers)
+  }
+
+  openWhatsapp(phoneNumber){
+    var link = "https://api.whatsapp.com/send?phone="+phoneNumber;
+    this.DataHolderProvider.numbers.forEach(element => {
+      if(element.number==phoneNumber){
+        element.status="read";
+      }
+    });
+    this.DataHolderProvider.updateNumbertoStorage();
+    window.open(link);
+  }
+
+  favorite(phoneNumber){
+    this.DataHolderProvider.numbers.forEach(element => {
+      if(element.number==phoneNumber){
+        element.status="favorite";
+      }
+    });
+    this.DataHolderProvider.updateNumbertoStorage();
+  }
+
+  delete(phoneNumber){
+    this.DataHolderProvider.numbers.forEach(element => {
+      if(element.number==phoneNumber){
+        element.status="archived";
+      }
+    });
+    this.DataHolderProvider.updateNumbertoStorage();
   }
  
 

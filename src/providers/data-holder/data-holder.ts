@@ -12,11 +12,12 @@ import { Storage } from '@ionic/storage';
 export class DataHolderProvider {
 
   public isInternetWorking = true;
-  public numbers: {name: string, number: string, country: string}[] = [];
-
+  public numbers: {id: number, name: string, number: string, country: string, status: string}[] = [];
+  public nNumbers = 0;
 
   constructor(public http: HttpClient, public storage: Storage) {
     console.log('Hello DataHolderProvider Provider');
+    this.getNumbersFromStorageOnLogin();
   }
 
   getNumbersFromStorageOnLogin(){
@@ -27,6 +28,7 @@ export class DataHolderProvider {
       }
       else{
         this.numbers = val;
+        this.nNumbers = val.length;
         console.log("some numbers found", val);    
       }
     }); 
@@ -60,7 +62,7 @@ export class DataHolderProvider {
      
      var _this = this;
      var frameTransactions = function mycallback(data) {
-      _this.numbers = []
+       //_this.numbers = []
        console.log("transactions received from server," , data)
        var dataParsed
        dataParsed = JSON.parse(data);
@@ -71,18 +73,23 @@ export class DataHolderProvider {
          var sampleTrans = dataParsed
            console.log(sampleTrans)
           for (var i=0; i<sampleTrans.length; i++){
-              var a = {name: sampleTrans[i].name, number: sampleTrans[i].number, country: sampleTrans[i].country}
-              _this.numbers.push(a);
+              var a = {id:sampleTrans[i].id, name: sampleTrans[i].name, number: sampleTrans[i].number, country: sampleTrans[i].country, status: 'new'}
+              if(sampleTrans[i].id>_this.nNumbers){
+                _this.numbers.push(a);
+                _this.nNumbers +=1;
+              }
           }
           //add to local storage
-          console.log("transactions storage updated", _this.numbers)
-          //_this.homePage.numbers = _this.numbers;
-          _this.storage.set('numbers', _this.numbers);
+          _this.updateNumbertoStorage();
        }
      }
      InitiateGetTransactions(1, frameTransactions); //passing mycallback as a method 
   }
 
+  updateNumbertoStorage(){
+    console.log("transactions storage updated", this.numbers)
+    this.storage.set('numbers', this.numbers);
+  }
 
 
 }

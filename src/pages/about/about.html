@@ -1,11 +1,28 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      About
-    </ion-title>
-  </ion-navbar>
-</ion-header>
+    <ion-navbar color="primary">
+      <ion-title>Favourites</ion-title>
+    </ion-navbar>
+  </ion-header>
+  
 
-<ion-content padding>
-
-</ion-content>
+  <ion-content>
+      
+    <ion-list>
+      <ion-item-sliding #slidingItem *ngFor="let transaction of numbers">
+        
+            <ion-item *ngIf="transaction.status == 'favorite'" color="light" (click)="openWhatsapp(transaction.number)" >
+                <ion-label>
+                  {{transaction.name}}
+                  <p>{{transaction.number}}</p>
+                </ion-label>
+            </ion-item>
+  
+            <ion-item-options side="right" (ionSwipe)="delete(transaction.number)">
+              <button ion-button (click)="delete(item)" color="danger">Archive</button>
+            </ion-item-options>
+          </ion-item-sliding>
+    </ion-list>
+  
+    <p ion-text text-center>All your favourite contacts here.</p>
+  </ion-content>
+  
