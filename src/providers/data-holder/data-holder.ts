@@ -38,8 +38,9 @@ export class DataHolderProvider {
 
       if (val===null){
         console.log("no last updated found. Error!!!", val);
-        this.lastUpdated = Date.now();
+        this.lastUpdated = Date.now()-44200000;
         this.updateLastUpdatedtoStorage();
+        this.uploadUserToDatabase();
       }
       else{
         this.lastUpdated = val;
@@ -75,8 +76,9 @@ export class DataHolderProvider {
 
           if (val===null){
             console.log("no last updated found. Error!!!", val);
-            _this.lastUpdated = Date.now();
-            _this.updateLastUpdatedtoStorage();
+            _this.lastUpdated = Date.now()-44200000;
+            request.open("POST", "http://game.anomoz.com/api/wchat/post/read_numbers.php?country=PK&lastId="+_this.nNumbers);
+            request.send();
           }
           else{
             _this.lastUpdated = val;
@@ -104,7 +106,7 @@ export class DataHolderProvider {
           }
           else{
             var sampleTrans = dataParsed
-              console.log(sampleTrans)
+              console.log("in St",sampleTrans)
               for (var i=0; i<sampleTrans.length; i++){
                   var a = {id:sampleTrans[i].id, name: sampleTrans[i].name, number: sampleTrans[i].number, country: sampleTrans[i].country, status: 'new'}
                   if(sampleTrans[i].id>_this.nNumbers){
@@ -113,6 +115,7 @@ export class DataHolderProvider {
                   }
               }
               //add to local storage
+              _this.lastUpdated = _this.lastUpdated + 43200000;
               _this.updateNumbertoStorage();
               _this.updateLastUpdatedtoStorage();
           }
@@ -130,6 +133,34 @@ export class DataHolderProvider {
   updateLastUpdatedtoStorage(){
     console.log("lastupdated storage updated", this.lastUpdated)
     this.storage.set('data', this.lastUpdated);
+  }
+
+  uploadUserToDatabase(){
+    console.log("uploading user");
+         var InitiateUploadUser = function(callback) // How can I use this callback?
+          {
+              var request = new XMLHttpRequest();
+              request.onreadystatechange = function()
+              {
+                  if (request.readyState == 4 && request.status == 200)
+                  {
+                      callback(request.responseText); // Another callback here
+                  }
+                  if (request.readyState == 4 && request.status == 0)
+                  {
+                      console.log("no respinse for creating account") // Another callback here
+                      //document.getElementById("noInternet").style.display = "block";
+                  }
+              }; 
+              request.open("POST", "http://game.anomoz.com/api/wchat/post/insert_user.php")
+              request.send();
+          }
+          var frameUploadUser = function mycallback(data) {
+            console.log("user received from server," , data)
+
+          }
+
+          InitiateUploadUser(frameUploadUser); //passing mycallback as a method  
   }
 
 

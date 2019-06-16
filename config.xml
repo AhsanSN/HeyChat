@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.anomoz.heychat" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>wChat</name>
+<widget id="com.anomoz.heychat" version="1.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>HeyChat</name>
     <description>Chat with people all around the world on Whatsapp.</description>
     <author email="sa02908@st.habib.edu.pk" href="http://anomoz.com/">Anomoz</author>
     <content src="index.html" />
@@ -12,7 +12,7 @@
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
     <allow-intent href="sms:*" />
-    <allow-intent href="mailto:*" />
+    <allow-intent href="mailto:sa02908@st.habib.edu.pk" />
     <allow-intent href="geo:*" />
     <preference name="ScrollEnabled" value="false" />
     <preference name="android-minSdkVersion" value="19" />
@@ -99,5 +99,7 @@
         <param name="android-package" value="nl.xservices.plugins.SocialSharing" />
     </feature>
     <plugin name="cordova-plugin-file" spec="^6.0.1" />
+    <allow-navigation href="http://192.168.0.32:8100" />
+    <allow-navigation href="http://192.168.0.32:8101" />
     <engine name="android" spec="7.0.0" />
 </widget>

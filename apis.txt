@@ -2,3 +2,5 @@
 
 //get numbers
 http://game.anomoz.com/api/wchat/post/read_numbers.php?country=PK&lastId=4
+
+http://game.anomoz.com/api/wchat/post/insert_user.php
