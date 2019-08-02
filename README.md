@@ -29,19 +29,12 @@
       </td>
       <!-- Video 2 -->
       <td align="center">
-          <img width="290" alt="wChat by Anomoz Softwares" src="/screenshots/5.png">
+          <img width="290" alt="wChat by Anomoz Softwares" src="/screenshots/innovations.png">
           <br>
       </td>
       <!-- Video 3 -->
       <td align="center">
           <img width="290" alt="wChat by Anomoz Softwares" src="/screenshots/6.png">
-          <br>
-      </td>
-    </tr>
-    <tr>
-      <!-- Video 1 -->
-      <td align="center">
-          <img width="290" alt="wChat by Anomoz Softwares" src="/screenshots/innovations.png">
           <br>
       </td>
     </tr>
